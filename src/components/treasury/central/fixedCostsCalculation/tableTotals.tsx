@@ -7,48 +7,72 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 
 export default function TableTotal({ data }: any) {
-  data.total = { "-": "Total", ...data.total };
-  data.pay = { "-": "Pagado", ...data.pay };
+  const [table, setTable] = useState<any>();
+  useEffect(() => {
+    console.log("Asd");
+
+    setTable(data);
+  }, [data]);
   return (
-    <Table
-      classNames={{
-        base: "max-w-[500px] min-w-[290px]",
-        wrapper: `items-center min-h-[141px]`,
-      }}>
-      <TableHeader>
-        {Object.keys(data.total).map((key: any) => (
-          <TableColumn align="center" key={key}>
-            {key}
-          </TableColumn>
-        ))}
-      </TableHeader>
-      <TableBody>
-        <TableRow key={"row1"}>
-          {Object.values(data.total).map((key: any) => (
-            <TableCell align="center" key={key.toString()}>
-              {key === "Total" ? key : "$" + key.toLocaleString("es-AR")}
-            </TableCell>
-          ))}
-        </TableRow>
-        <TableRow key={"row2"}>
-          {Object.values(data.pay).map((key: any) => (
-            <TableCell align="center" key={key.toString()}>
-              {key === "Pagado" ? key : "$" + key.toLocaleString("es-AR")}
-            </TableCell>
-          ))}
-        </TableRow>
-        <TableRow key={"row3"}>
-          {Object.entries(data.total).map(([key, value]: any) => (
-            <TableCell align="center" key={key.toString()}>
-              {key === "-"
-                ? "% del Total"
-                : ((value / data.total.total) * 100).toFixed(2) + "%"}
-            </TableCell>
-          ))}
-        </TableRow>
-      </TableBody>
-    </Table>
+    <>
+      {table && (
+        <Table
+          aria-label="Totals table"
+          classNames={{
+            base: " min-w-[290px]",
+            wrapper: `items-center min-h-[141px]`,
+          }}>
+          <TableHeader>
+            {Object.keys(data.total).map((key: any) => (
+              <TableColumn align="center" key={key}>
+                {key !== "" ? FIXED_COST_TYPE_DICTIONARY[key] : key}
+              </TableColumn>
+            ))}
+          </TableHeader>
+          <TableBody>
+            <TableRow key={"row1"}>
+              {Object.values(data.total).map((key: any) => (
+                <TableCell align="center" key={key.toString()}>
+                  {key}
+                </TableCell>
+              ))}
+            </TableRow>
+            <TableRow key={"row2"}>
+              <TableCell align="center" key={"title paid"}>
+                {table.pay[""]}
+              </TableCell>
+              <TableCell align="center" key={"property paid"}>
+                {table.pay.property}
+              </TableCell>
+              <TableCell align="center" key={"service paid"}>
+                {table.pay.service}
+              </TableCell>
+              <TableCell align="center" key={"tax paid"}>
+                {table.pay.tax}
+              </TableCell>
+              <TableCell align="center" key={"salary paid"}>
+                {table.pay.salary}
+              </TableCell>
+              <TableCell align="center" key={"other paid"}>
+                {table.pay.other}
+              </TableCell>
+              <TableCell align="center" key={"total paid"}>
+                {table.pay.total}
+              </TableCell>
+            </TableRow>
+            <TableRow key={"row2"}>
+              {Object.values(data.percentage).map((key: any) => (
+                <TableCell align="center" key={key.toString()}>
+                  {key}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableBody>
+        </Table>
+      )}
+    </>
   );
 }

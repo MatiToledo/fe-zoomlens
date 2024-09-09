@@ -1,4 +1,3 @@
-import { PostnetBank } from "./models";
 import {
   fetchCreateFlowContingency,
   fetchDeleteFlowContingency,
@@ -127,6 +126,7 @@ export const FIXED_COST_TYPE_DICTIONARY: Record<string, string> = {
   property: "Propiedad",
   service: "Servicios",
   tax: "Impuestos",
+  salary: "Salarios",
   other: "Otros",
   total: "Total",
 };
