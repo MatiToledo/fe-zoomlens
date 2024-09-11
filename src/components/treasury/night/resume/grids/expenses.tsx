@@ -21,7 +21,6 @@ export default function GridExpenses({
   mutate,
   date,
 }: any) {
-  console.log("concepts: ", concepts);
   const [data, setData] = useState<Expense[]>();
   const createdRowIds = useMemo(() => new Set(), []);
   const updatedRowIds = useMemo(() => new Set(), []);

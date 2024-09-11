@@ -27,7 +27,7 @@ export default function TableFlowContingency({
     start: parseDate(getInitialsDate("start")),
     end: parseDate(getInitialsDate("end")),
   });
-  const concepts = useGetConceptsByLevel("1", true);
+  const concepts = useGetConceptsByLevel("1");
   const { movements, setMovements, mutate } = useAllFlowContingency(
     user.BranchId,
     date

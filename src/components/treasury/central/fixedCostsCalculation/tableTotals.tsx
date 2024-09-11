@@ -12,8 +12,6 @@ import { useEffect, useState } from "react";
 export default function TableTotal({ data }: any) {
   const [table, setTable] = useState<any>();
   useEffect(() => {
-    console.log("Asd");
-
     setTable(data);
   }, [data]);
   return (

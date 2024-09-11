@@ -94,7 +94,7 @@ export const IDENTIFIERS_DICTIONARY: Record<string, string> = {
   treasuryNightExpense: "Gastos",
   treasuryNightRetirementfinish: "Retiros Finales",
   treasuryCentralFlowContingency: "Flow de Contingencias",
-  treasuryCentralFlowFixedCost: "Flow de Costos Fijos",
+  treasuryCentralFlowFixedcost: "Flow de Costos Fijos",
   treasuryCentralFlowWorks: "Flow de Obras",
   treasuryCentralRegisterCash: "Caja de Efectivo",
   treasuryCentralRegisterBank: "Caja de Banco",

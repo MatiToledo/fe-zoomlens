@@ -7,7 +7,6 @@ export function useGetCashRegisterMovements(
   date: CalendarDate
 ) {
   const queryDate = `${date.year}-${date.month}-${date.day}`;
-  console.log("BranchId: ", BranchId);
 
   const { data, isLoading, mutate } = useSWR(
     `/cashRegister/movements?BranchId=${BranchId}&date=${queryDate}`,

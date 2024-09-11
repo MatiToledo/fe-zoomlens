@@ -70,6 +70,12 @@ export const SelectComponent = React.memo(
             ...provided,
             opacity: active ? 1 : 0,
           }),
+          input: (provided) => ({
+            ...provided,
+            opacity: active ? 1 : 0,
+            color: "hsl(var(--nextui-foreground))", // Color de texto cuando está seleccionado
+          }),
+
           option: (provided, state) => ({
             ...provided,
             cursor: "pointer",

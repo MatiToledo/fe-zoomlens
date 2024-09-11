@@ -11,8 +11,10 @@ import {
   Concept,
   Expense,
   Group,
+  PostnetBank,
   RegisterBar,
   RegisterBarClosure,
+  RegisterCash,
   RegisterTicket,
   RegisterTicketClosure,
   Retirement,
@@ -24,7 +26,9 @@ import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 
 export const downloadCSV = (data: any, type: string) => {
+  console.log("type: ", type);
   const translatedData = translateData(data, type);
+  console.log("translatedData: ", translatedData);
   const worksheet = XLSX.utils.json_to_sheet(translatedData);
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
@@ -60,7 +64,7 @@ function s2ab(s: string): Uint8Array {
 
 function translateData(data: any, type: string) {
   switch (type) {
-    case "Cierre_de_Caja": {
+    case "Cierres de Caja": {
       return data.map((row: RegisterBarClosure) => {
         let prettyConsumption = "";
         for (const consumptions of row.consumptions) {
@@ -83,7 +87,7 @@ function translateData(data: any, type: string) {
         };
       });
     }
-    case "Cierre_de_Boleteria": {
+    case "Cierres de Boleteria": {
       return data.map((row: RegisterTicketClosure) => {
         let prettyTickets = "";
         for (const ticket of row.tickets) {
@@ -107,7 +111,7 @@ function translateData(data: any, type: string) {
         };
       });
     }
-    case "Retiro_Nocturno": {
+    case "Retiros": {
       return data.map((row: Retirement) => {
         return {
           Fecha: row.date,
@@ -118,7 +122,7 @@ function translateData(data: any, type: string) {
         };
       });
     }
-    case "Retiro_Finales_Nocturno": {
+    case "Retiros Finales": {
       return data.map((row: RetirementFinish) => {
         return {
           Fecha: row.date,
@@ -133,7 +137,7 @@ function translateData(data: any, type: string) {
         };
       });
     }
-    case "Gastos_Nocturno": {
+    case "Gastos": {
       return data.map((row: Expense) => {
         return {
           Fecha: row.date,
@@ -149,26 +153,8 @@ function translateData(data: any, type: string) {
         };
       });
     }
-    // case "Movimientos_Tesoreria": {
-    //   return data.map((row: TreasuryCe) => {
-    //     return {
-    //       Fecha: row.date,
-    //       Tipo: MOVEMENT_TYPE_DICTIONARY[row.type],
-    //       "Metodo de pago": PAYMENT_METHOD_DICTIONARY[row.payment_method],
-    //       Descripcion: row.description,
-    //       Monto: row.amount,
-    //       Concepto: row.concept,
-    //       Compania: row.company,
-    //       Grupo: row.group,
-    //       Sucursal: row.branch,
-    //       "Saldo Efectivo": row.balanceCash,
-    //       "Saldo Banco": row.balanceBank,
-    //       "Saldo Transferencia": row.balanceTransfer,
-    //       Editado: row.isEdited ? "Si" : "No",
-    //     };
-    //   });
-    // }
-    case "Cierres_Tesoreria": {
+
+    case "Cierres de Tesoreria": {
       return data.map((row: CashRegister) => {
         return {
           Fecha: row.date,
@@ -189,6 +175,40 @@ function translateData(data: any, type: string) {
           Diferencia: row.difference,
         };
       });
+    }
+    case "Flow de Contingencias":
+    case "Flow de Costos Fijos":
+    case "Flow de Obras":
+    case "Caja de Dolares":
+    case "Caja de Mercado Pago":
+    case "Caja de Banco":
+    case "Caja de Efectivo": {
+      return data.map((row: RegisterCash) => {
+        return {
+          Fecha: row.date,
+          Compania: row.CompanyName,
+          Grupo: row.GroupName,
+          Sucursal: row.BranchName,
+          Concepto: row.ConceptName,
+          Descripcion: row.description,
+          Tipo: row.type,
+          Monto: row.amount,
+        };
+      });
+    }
+    case "Postnets de MP":
+    case "Postnets de Banco": {
+      return data.map((row: PostnetBank) => ({
+        Fecha: row.date,
+        Compania: row.CompanyName,
+        Grupo: row.GroupName,
+        Sucursal: row.BranchName,
+        Comentario: row.comment,
+        Debito: row.debit,
+        Credito: row.credit,
+        QR: row.qr,
+        Total: row.total,
+      }));
     }
     case "Usuarios": {
       return data.map((row: User) => ({
