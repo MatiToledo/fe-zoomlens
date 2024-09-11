@@ -52,7 +52,6 @@ export default function CashRegisterPDF({
     expensesDetailsTable: tables.expensesDetailsTable,
     groupedExpensesTable: tables.groupedExpensesTable,
   };
-  console.log("data: ", data);
   const minWidth = data.principalTable.columns.length * 150;
 
   useEffect(() => {

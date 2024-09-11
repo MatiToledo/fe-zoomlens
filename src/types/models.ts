@@ -126,6 +126,7 @@ export interface CashRegister extends Model {
   BranchName: string;
   GroupName: string;
   CompanyName: string;
+
   BranchId: UUID;
   Branch: Branch;
 }
@@ -363,8 +364,12 @@ export interface PostnetBank extends Model {
   debit: number;
   credit: number;
   qr: number;
+  total: number;
   comment: string;
   BranchId: UUID;
+  BranchName: string;
+  GroupName: string;
+  CompanyName: string;
   Branch: Branch;
 }
 export interface PostnetMP extends Model {

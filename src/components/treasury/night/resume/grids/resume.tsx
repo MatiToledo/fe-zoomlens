@@ -8,7 +8,6 @@ import { DataSheetGrid, keyColumn, textColumn } from "react-datasheet-grid";
 
 export default function GridResume({ tableData, BranchId, mutate, date }: any) {
   const [data, setData] = useState<any>();
-  console.log("data: ", data);
 
   const updatedRows = useMemo(() => new Set(), []);
   const columns: any = [

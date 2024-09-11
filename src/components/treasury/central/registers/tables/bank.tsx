@@ -27,7 +27,7 @@ export default function TableTreasuryCentralRegisterBank({
     start: parseDate(getInitialsDate("start")),
     end: parseDate(getInitialsDate("end")),
   });
-  const concepts = useGetConceptsByLevel("1", true);
+  const concepts = useGetConceptsByLevel("1");
   const { movements, setMovements, mutate } = useAllTreasuryCentralRegisterBank(
     user.BranchId,
     date

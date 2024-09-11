@@ -49,7 +49,6 @@ export default function TreasuryCentralPostnetForm({
 }: PropsType) {
   const isEdit = !!rowSelected;
   let { identifier } = usePathnameData();
-  console.log("identifier: ", identifier);
   identifier = formatIdentifier(identifier, isEdit);
   const [date, setDate] = useState(parseDate(formattedToday));
 

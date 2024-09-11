@@ -1,5 +1,5 @@
 import { fetchAllPostnetMPByBranch } from "@/api/endpoints/treasury/central/postnet/mp";
-import { PostnetBank } from "@/types/models";
+import { PostnetBank, PostnetMP } from "@/types/models";
 import { CalendarDate } from "@nextui-org/react";
 import { UUID } from "crypto";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ export function useAllTreasuryCentralPostnetMP(
   BranchId: UUID,
   date: { start: CalendarDate; end: CalendarDate }
 ) {
-  const [movements, setMovements] = useState<PostnetBank[]>([]);
+  const [movements, setMovements] = useState<PostnetMP[]>([]);
 
   const { data, isLoading, mutate } = useSWR(
     `/treasury/central/postnet/mp/branch/${BranchId}?startDate=${date.start}&endDate=${date.end}`,
