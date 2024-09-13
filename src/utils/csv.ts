@@ -26,9 +26,7 @@ import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 
 export const downloadCSV = (data: any, type: string) => {
-  console.log("type: ", type);
   const translatedData = translateData(data, type);
-  console.log("translatedData: ", translatedData);
   const worksheet = XLSX.utils.json_to_sheet(translatedData);
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");

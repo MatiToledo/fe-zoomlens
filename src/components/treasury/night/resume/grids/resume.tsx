@@ -80,12 +80,14 @@ export default function GridResume({ tableData, BranchId, mutate, date }: any) {
           item.model === "RetirementFinish"
       );
       if (existingUpdate) {
-        if (row.label === "Postnet") {
-          existingUpdate.postnet = Number(value);
-        } else if (row.label === "Transferencias") {
-          existingUpdate.postnet = Number(value);
+        if (row.label === "Transferencias") {
+          existingUpdate.transfers = Number(value);
         } else if (row.label.startsWith("Gastos")) {
           existingUpdate.expenses = Number(value);
+        } else if (row.label.startsWith("Postnet Mercado")) {
+          existingUpdate.postnetMP = Number(value);
+        } else if (row.label.startsWith("Postnet Banco")) {
+          existingUpdate.postnetBank = Number(value);
         } else {
           existingUpdate.amount = Number(value);
         }
@@ -96,12 +98,14 @@ export default function GridResume({ tableData, BranchId, mutate, date }: any) {
           type: row.data[key].type,
           model: "RetirementFinish",
         };
-        if (row.label === "Postnet") {
-          toUpdate.postnet = Number(value);
-        } else if (row.label === "Transferencias") {
-          toUpdate.postnet = Number(value);
+        if (row.label === "Transferencias") {
+          toUpdate.transfers = Number(value);
         } else if (row.label.startsWith("Gastos")) {
           toUpdate.expenses = Number(value);
+        } else if (row.label.startsWith("Postnet Mercado")) {
+          toUpdate.postnetMP = Number(value);
+        } else if (row.label.startsWith("Postnet Banco")) {
+          toUpdate.postnetBank = Number(value);
         } else {
           toUpdate.amount = Number(value);
         }
