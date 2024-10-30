@@ -30,6 +30,7 @@ type Props = {
 export default function FilterButtons({
   isAdmin,
   isManagement,
+
   setDate,
   setQueries,
   defaultValues,

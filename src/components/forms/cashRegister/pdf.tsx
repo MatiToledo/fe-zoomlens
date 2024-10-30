@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import TableComponent from "@/components/table";
-import generatePDF from "@/utils/generatePDF";
+import { generatePDF } from "@/utils/generatePDF";
 import { useEffect, useRef, useState } from "react";
 
 type PropsType = {
@@ -67,7 +67,7 @@ export default function CashRegisterPDF({
         ReactDOM.createPortal(
           <div
             ref={tablesRef}
-            className={`flex flex-col gap-6  justify-center bg-default-300 px-5 py-5 items-center min-w-[800px] max-w-[${minWidth.toString()}px] absolute top-[-10000000000px]  text-center`}>
+            className={`flex flex-col gap-6  justify-center bg-default-300 px-5 py-5 items-center min-w-[900px] max-w-[${minWidth.toString()}px] absolute top-[-10000000000px]  text-center`}>
             <div className="flex flex-col gap-3 z-10">
               <img
                 src="/logo.png"

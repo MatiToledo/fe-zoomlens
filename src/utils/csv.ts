@@ -1,3 +1,4 @@
+import { Product, StockCentral } from "./../types/models";
 import {
   MOVEMENT_TYPE_DICTIONARY,
   PAYMENT_METHOD_DICTIONARY,
@@ -19,6 +20,7 @@ import {
   RegisterTicketClosure,
   Retirement,
   RetirementFinish,
+  StockRegisterBar,
   User,
   UserBO,
 } from "@/types/models";
@@ -206,6 +208,72 @@ function translateData(data: any, type: string) {
         Credito: row.credit,
         QR: row.qr,
         Total: row.total,
+      }));
+    }
+    case "Productos Stock Central": {
+      return data.map((row: Product) => ({
+        Nombre: row.name,
+        Precio: row.price,
+        Observaction: row.observation,
+        Compañia: row.CompanyName,
+        Grupo: row.GroupName,
+        Sucursal: row.BranchName,
+      }));
+    }
+    case "Movimientos Stock Central": {
+      return data.map((row: StockCentral) => ({
+        Producto: row.ProductName,
+        Inicial: row.initial,
+        Compras: row.entries,
+        Salidas: row.exits,
+        Total: row.total,
+        Mes: row.month,
+        Semana: row.week,
+        Compañia: row.CompanyName,
+        Grupo: row.GroupName,
+        Sucursal: row.BranchName,
+      }));
+    }
+    case "Stocks de Barra": {
+      return data.map((row: StockRegisterBar) => ({
+        Fecha: row.date,
+        Producto: row.ProductName,
+        Inicial: row.initial,
+        Entradas: row.entries,
+        Salidas: row.exits,
+        Consumido: row.consumed,
+        Final: row.final,
+        Cerrado: row.closed ? "Si" : "No",
+        Compañia: row.CompanyName,
+        Grupo: row.GroupName,
+        Sucursal: row.BranchName,
+        Barra: row.RegisterBarName,
+      }));
+    }
+    case "Cierres de Stock de Barra": {
+      return data.map((row: any) => ({
+        Fecha: row.date,
+        Consumido: row.consumed,
+        Observacion: row.observation,
+        Compañia: row.CompanyName,
+        Grupo: row.GroupName,
+        Sucursal: row.BranchName,
+        Barra: row.RegisterBarName,
+      }));
+    }
+    case "Detalles de Stock de Cierre de Barra": {
+      return data.map((row: StockRegisterBar) => ({
+        Fecha: row.date,
+        Producto: row.ProductName,
+        Inicial: row.initial,
+        Entradas: row.entries,
+        Salidas: row.exits,
+        Consumido: row.consumed,
+        Final: row.final,
+        Compañia: row.CompanyName,
+        Grupo: row.GroupName,
+        Sucursal: row.BranchName,
+        Barra: row.RegisterBarName,
       }));
     }
     case "Usuarios": {

@@ -13,7 +13,9 @@ export function usePathnameData() {
   const isTreasuryNight =
     pathname.includes("treasury/night") || pathname.includes("cashRegister");
   const isClosure = pathname.includes("closure");
-  const isManagement = !isTreasury && !isTreasuryNight && !isClosure;
+  const isStock = pathname.includes("stock");
+  const isManagement =
+    !isTreasury && !isTreasuryNight && !isClosure && !isStock;
 
   const path = pathname.split("/").slice(2).join("/") || "";
 
@@ -79,6 +81,15 @@ export function useFilters({
   useEffect(() => {
     setQueries((prev) => ({ ...prev, level: getValues("level") }));
   }, [watch("level")]);
+  useEffect(() => {
+    setQueries((prev) => ({ ...prev, year: getValues("year") }));
+  }, [watch("year")]);
+  useEffect(() => {
+    setQueries((prev) => ({ ...prev, month: getValues("month") }));
+  }, [watch("month")]);
+  useEffect(() => {
+    setQueries((prev) => ({ ...prev, week: getValues("week") }));
+  }, [watch("week")]);
 
   return { companies, groups, branches, concepts, selectedFields };
 }

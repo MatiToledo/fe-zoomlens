@@ -9,6 +9,12 @@ export default function RegisterComponent() {
     <div className="h-[calc(100vh-65px)] p-5 w-full  flex justify-center items-center">
       <div className="flex flex-col container mx-auto p-4 gap-4 max-w-md h-full grow justify-center">
         <Button
+          onClick={() => push("/stockRegisterBar")}
+          color="primary"
+          fullWidth>
+          Stock
+        </Button>
+        <Button
           onClick={() => push("/registerBarClosure")}
           color="primary"
           fullWidth>

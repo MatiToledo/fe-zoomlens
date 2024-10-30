@@ -8,12 +8,14 @@ import { useGetAllBranchesByGroup } from "@/hooks/backoffice/branch";
 import { useGetAllCompanies } from "@/hooks/backoffice/company";
 import { useGetAllGroupsByCompany } from "@/hooks/backoffice/group";
 import { User } from "@/types/models";
+import { UploadImageInput } from "@/ui/inputs/image";
 import { ControlledInput } from "@/ui/inputs/input";
 import { ControlledPassword } from "@/ui/inputs/password";
 import { ControlledSelect } from "@/ui/inputs/select";
 import notify from "@/utils/notify";
 import { rulesDNI } from "@/utils/rules/dni";
 import { rulesEmail } from "@/utils/rules/email";
+import { rulesFullName } from "@/utils/rules/fullName";
 import { rulesPhone } from "@/utils/rules/phone";
 import {
   Button,
@@ -62,11 +64,9 @@ export default function UserForm({
       BranchId: isEdit ? rowSelected.BranchId : undefined,
     },
   });
-
   const companies = useGetAllCompanies();
   const groups = useGetAllGroupsByCompany(watch("CompanyId"));
   const branches = useGetAllBranchesByGroup(watch("GroupId"));
-
   async function onSubmit(data: any) {
     const body = {
       Auth: {
@@ -119,7 +119,7 @@ export default function UserForm({
           <ControlledInput
             error={errors.fullName}
             control={control}
-            rules={{ required: true }}
+            rules={rulesFullName}
             name="fullName"
             placeholder="Nombre"></ControlledInput>
           <ControlledInput
@@ -158,6 +158,14 @@ export default function UserForm({
                 label: "Cajero Boleteria",
                 value: "registerTicketClosure",
               },
+              {
+                label: "Stock Central",
+                value: "stockCentral",
+              },
+              {
+                label: "Stock Barra",
+                value: "stockRegisterBar",
+              },
               { label: "Tesorero", value: "treasuryCentral" },
               { label: "Tesorero Nocturno", value: "treasuryNight" },
             ]}
@@ -183,6 +191,7 @@ export default function UserForm({
             control={control}
             label="Sucursal"
             name="BranchId"></ControlledSelect>
+          <UploadImageInput photo={photo} setPhoto={setPhoto} />
         </ModalBody>
         <ModalFooter>
           {isEdit && (

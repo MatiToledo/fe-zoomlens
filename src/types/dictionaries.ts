@@ -51,6 +51,8 @@ export const USER_ROL_DICTIONARY: Record<string, string> = {
   treasury: "Tesorero",
   treasuryNight: "Tesorero Nocturno",
   treasuryCentral: "Tesorero Central",
+  stockRegisterBar: "Stock Barra",
+  stockCentral: "Stock Central",
 };
 export const ADMINS_ROL_DICTIONARY: Record<string, string> = {
   admin: "Administrador",
@@ -105,6 +107,11 @@ export const IDENTIFIERS_DICTIONARY: Record<string, string> = {
   concept: "Conceptos",
   admin: "Administradores",
   treasuryNightCashregister: "Cierres de Tesoreria",
+  stockProduct: "Productos Stock Central",
+  stockCentral: "Movimientos Stock Central",
+  stockRegisterbar: "Stocks de Barra",
+  stockRegisterbarclosure: "Cierres de Stock de Barra",
+  stockRegisterbarclosureDetail: "Detalles de Stock de Cierre de Barra",
 };
 
 export const MONTHS_DICTIONARIES: Record<number, string> = {

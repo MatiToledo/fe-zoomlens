@@ -1,6 +1,8 @@
+import { usePathnameData } from "@/hooks/backoffice";
 import { SubmitIcon } from "@/ui/icons/submit";
 import { Button } from "@nextui-org/react";
 import { UUID } from "crypto";
+import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useMemo } from "react";
 import { DataSheetGrid } from "react-datasheet-grid";
 import { createAddRowsComponent } from "react-datasheet-grid/dist/components/AddRows";
@@ -18,6 +20,7 @@ export default function GridComponent({
   BranchId,
   fetcher,
   mutate,
+  showNew = true,
 }: {
   data: any;
   setData: Dispatch<SetStateAction<any[]>>;
@@ -25,6 +28,7 @@ export default function GridComponent({
   BranchId: UUID;
   fetcher: any;
   mutate: KeyedMutator<any>;
+  showNew?: boolean;
 }) {
   const createdRowIds = useMemo(() => new Set(), []);
   const updatedRowIds = useMemo(() => new Set(), []);
@@ -50,8 +54,10 @@ export default function GridComponent({
       <DataSheetGrid
         aria-label={`Grid for ${BranchId} `}
         aria-labelledby={`Grid for ${BranchId} `}
-        className="p-4 z-0 flex-col relative bg-content1 overflow-auto rounded-large shadow-small w-full flex justify-start"
-        addRowsComponent={AddRows as any}
+        className={`p-4 z-0 flex-col relative bg-content1 overflow-auto rounded-large shadow-small w-full flex justify-start ${
+          showNew ? "" : "pb-[60px]"
+        }`}
+        addRowsComponent={showNew ? (AddRows as any) : null}
         disableContextMenu
         value={data}
         height={650}
@@ -86,7 +92,10 @@ export default function GridComponent({
           setData(newValue as any);
         }}
       />
-      <div className="absolute bottom-[16px] right-[108px] flex row justify-center align-middle">
+      <div
+        className={`absolute bottom-[16px] ${
+          showNew ? "right-[108px]" : "right-[16px]"
+        } flex row justify-center align-middle`}>
         <Button
           className="bg-foreground text-background size-sm"
           startContent={<SubmitIcon />}

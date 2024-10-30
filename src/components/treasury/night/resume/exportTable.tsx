@@ -1,6 +1,6 @@
 import TableComponent from "@/components/table";
 import { ExportIcon } from "@/ui/icons/export";
-import generatePDF from "@/utils/generatePDF";
+import { generatePDF } from "@/utils/generatePDF";
 import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
 import { useRef, useState } from "react";
