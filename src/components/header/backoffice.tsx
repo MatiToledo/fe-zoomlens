@@ -122,6 +122,28 @@ export default function BOHeader({ user }: { user: UserBO }) {
       ],
     },
     {
+      title: "Stock",
+      show: true,
+      options: [
+        {
+          label: "Productos",
+          link: "/backoffice/stock/product",
+        },
+        {
+          label: "Central",
+          link: "/backoffice/stock/central",
+        },
+        {
+          label: "Barras",
+          link: "/backoffice/stock/registerBar",
+        },
+        {
+          label: "Cierres de Barras",
+          link: "/backoffice/stock/registerBarClosure",
+        },
+      ],
+    },
+    {
       title: "Gestion",
       show: isAdmin,
       isActive: ["cash", "bank", "mp", "usd"].includes(pathname.split("/")[2]),

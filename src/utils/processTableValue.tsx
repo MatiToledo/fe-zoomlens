@@ -1,13 +1,16 @@
 import {
   ADMINS_ROL_DICTIONARY,
+  IDENTIFIERS_DICTIONARY,
   MOVEMENT_TYPE_DICTIONARY,
   PAYMENT_METHOD_DICTIONARY,
   TREASURY_TYPE_DICTIONARY,
   USER_ROL_DICTIONARY,
 } from "@/types/dictionaries";
 import { EditIcon } from "@/ui/icons/edit";
+import { ExportIcon } from "@/ui/icons/export";
 import { Avatar } from "@nextui-org/avatar";
 import Image from "next/image";
+import { downloadCSV } from "./csv";
 
 export default function processTableValue(
   columnId: any,
@@ -133,6 +136,29 @@ export default function processTableValue(
       const day = value.split("-")[2];
       return `${day}/${month}/${year}`;
 
+    case "consumed":
+      if (identifier === "stockRegisterbar") {
+        return value;
+      } else {
+        return `${value ? "$" + value.toLocaleString("es-AR") : "-"}`;
+      }
+
+    case "export":
+      return (
+        <div
+          className="flex gap-2 items-center justify-center"
+          onClick={() =>
+            downloadCSV(
+              row.StockRegisterBars,
+              IDENTIFIERS_DICTIONARY["stockRegisterbarclosureDetail"]
+            )
+          }>
+          <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+            <ExportIcon />
+          </span>
+        </div>
+      );
+    case "closed":
     case "visible":
       return <div>{Boolean(value) ? "✅" : "❌"}</div>;
     case "retirementTotal":
@@ -166,7 +192,12 @@ export default function processTableValue(
     case "debit":
     case "credit":
     case "qr":
+    case "price":
+
     case "difference":
+      if (identifier === "stockCentral") {
+        return value;
+      }
       return `${value ? "$" + value.toLocaleString("es-AR") : "-"}`;
     default:
       return value;

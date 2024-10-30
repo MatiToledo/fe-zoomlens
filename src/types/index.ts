@@ -25,6 +25,9 @@ export interface QueryTables {
   ConceptId?: string;
   GroupId?: string;
   BranchId?: string;
+  month?: string;
+  year?: string;
+  week?: string;
   level?: string;
   role?: string;
   date?: string;

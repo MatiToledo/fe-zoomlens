@@ -382,3 +382,51 @@ export interface PostnetMP extends Model {
   BranchId: UUID;
   Branch: Branch;
 }
+
+export interface Product extends Model {
+  id: UUID;
+  name: string;
+  price: number;
+  observation: string;
+  BranchId: UUID;
+  Branch: Branch;
+  CompanyName: string;
+  GroupName: string;
+  BranchName: string;
+}
+
+export interface StockCentral extends Model {
+  id: UUID;
+  month: number;
+  week: number;
+  initial: number;
+  entries: number;
+  exits: number;
+  total: number;
+  BranchId: UUID;
+  ProductId: UUID;
+  Product: Product;
+  ProductName: string;
+  CompanyName: string;
+  GroupName: string;
+  BranchName: string;
+}
+
+export interface StockRegisterBar extends Model {
+  id: UUID;
+  date: Date;
+  initial: number;
+  entries: number;
+  exits: number;
+  final: number;
+  consumed: number;
+  closed: boolean;
+  ProductName: string;
+  BranchId: UUID;
+  RegisterBarName: string;
+  ProductPrice: number;
+  StockRegisterBarClosureId: UUID;
+  CompanyName: string;
+  GroupName: string;
+  BranchName: string;
+}
